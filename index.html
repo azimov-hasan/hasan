@@ -5,71 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hasan Azimboyev — Startup asoschisi, marketing va dizayn</title>
   <meta name="description" content="Hasan Azimboyev: Insayr va TEZOL asoschisi, marketing menejeri va dizayner. Portfolio.">
-  <meta name="theme-color" content="#0b0d12">
+  <meta name="theme-color" content="#bfe3d9">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- NAVIGATSIYA -->
-  <header class="nav" id="top">
-    <a class="nav__logo" href="#top">HA<span>.</span></a>
-    <nav class="nav__links" id="navLinks" aria-label="Asosiy menyu">
+  <!-- MENYU PANELI (Mac OS uslubi) -->
+  <header class="menubar" id="top">
+    <a class="menubar__logo" href="#top">◆ HA.OS</a>
+    <nav class="menubar__links" id="navLinks" aria-label="Asosiy menyu">
       <a href="#ventures" data-i18n="nav.ventures">Loyihalar</a>
       <a href="#design" data-i18n="nav.design">Dizayn</a>
       <a href="#about" data-i18n="nav.about">Men haqimda</a>
-      <button class="lang" id="langBtn" aria-label="Tilni almashtirish">EN</button>
-      <a href="#contact" class="btn btn--small" data-i18n="nav.contact">Bog'lanish</a>
+      <a href="#contact" data-i18n="nav.contact">Bog'lanish</a>
     </nav>
-    <button class="nav__toggle" id="navToggle" aria-label="Menyuni ochish" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+    <div class="menubar__right">
+      <button class="lang" id="langBtn" aria-label="Tilni almashtirish">EN</button>
+      <span class="clock" id="clock" aria-hidden="true">--:--</span>
+      <button class="menubar__toggle" id="navToggle" aria-label="Menyuni ochish" aria-expanded="false">☰</button>
+    </div>
   </header>
 
-  <main>
+  <main class="desk">
     <!-- 1. HERO -->
     <section class="hero container">
-      <div class="hero__text">
-        <p class="eyebrow reveal" data-i18n="hero.eyebrow">Startup asoschisi · Marketing · Dizayn</p>
-        <h1 class="hero__title reveal" data-i18n-html="hero.title">Men g'oyani <em>mahsulotga</em> va mahsulotni brendga aylantiraman.</h1>
-        <p class="hero__lead reveal" data-i18n="hero.lead">Salom, men Hasan. Insayr va TEZOL asoschisiman, 50 dan ortiq yosh tadbirkorga mentorlik qilganman.</p>
-        <div class="hero__cta reveal">
-          <a href="#ventures" class="btn" data-i18n="hero.cta1">Loyihalarni ko'rish</a>
-          <a href="#contact" class="btn btn--ghost" data-i18n="hero.cta2">Bog'lanish</a>
+      <article class="win hero__win reveal" style="--c: var(--yellow)">
+        <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">hello.txt</span></div>
+        <div class="win__body">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Startup asoschisi · Marketing · Dizayn</p>
+          <h1 class="hero__title" data-i18n-html="hero.title">Men g'oyani <em>mahsulotga</em> va mahsulotni brendga aylantiraman.</h1>
+          <p class="hero__lead" data-i18n="hero.lead">Salom, men Hasan. Insayr va TEZOL asoschisiman, 50 dan ortiq yosh tadbirkorga mentorlik qilganman.</p>
+          <div class="hero__cta">
+            <a href="#ventures" class="btn" data-i18n="hero.cta1">Loyihalarni ko'rish</a>
+            <a href="#contact" class="btn btn--ghost" data-i18n="hero.cta2">Bog'lanish</a>
+          </div>
         </div>
-      </div>
-      <!-- Blender ishi tayyor bo'lgach shu blok video/rasm bilan almashtiriladi -->
-      <div class="hero__visual" aria-hidden="true">
-        <div class="glow"></div>
-        <div class="cube">
-          <i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i><i class="f5"></i><i class="f6"></i>
+      </article>
+
+      <!-- Blender ishi tayyor bo'lgach shu oyna video/rasm bilan almashtiriladi -->
+      <article class="win cube__win reveal" style="--c: var(--pink)" aria-hidden="true">
+        <div class="win__bar"><span class="win__dots"><i></i><i></i><i></i></span><span class="win__title">cube.3d</span></div>
+        <div class="win__body cube__stage">
+          <div class="cube">
+            <i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i><i class="f5"></i><i class="f6"></i>
+          </div>
         </div>
-      </div>
+      </article>
     </section>
 
     <!-- 2. RAQAMLAR -->
-    <section class="stats container" aria-label="Natijalar">
-      <div class="stat reveal"><strong data-count="35000" data-prefix="$" data-suffix="+">$35,000+</strong><span data-i18n="stat.grants">yutilgan grantlar</span></div>
-      <div class="stat reveal"><strong data-count="50" data-suffix="+">50+</strong><span data-i18n="stat.mentored">mentorlik qilingan yoshlar</span></div>
-      <div class="stat reveal"><strong data-count="2" data-suffix="">2</strong><span data-i18n="stat.startups">asos solingan startap</span></div>
-      <div class="stat reveal"><strong data-count="5" data-suffix="+">5+</strong><span data-i18n="stat.years">yillik tajriba</span></div>
+    <section class="container" aria-label="Natijalar">
+      <article class="win reveal" style="--c: var(--mint)">
+        <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">results.xls</span></div>
+        <div class="stats">
+          <div class="stat"><strong data-count="35000" data-prefix="$" data-suffix="+">$35,000+</strong><span data-i18n="stat.grants">yutilgan grantlar</span></div>
+          <div class="stat"><strong data-count="50" data-suffix="+">50+</strong><span data-i18n="stat.mentored">mentorlik qilingan yoshlar</span></div>
+          <div class="stat"><strong data-count="2" data-suffix="">2</strong><span data-i18n="stat.startups">asos solingan startap</span></div>
+          <div class="stat"><strong data-count="5" data-suffix="+">5+</strong><span data-i18n="stat.years">yillik tajriba</span></div>
+        </div>
+      </article>
     </section>
 
     <!-- 3. VENTURALAR -->
     <section class="section container" id="ventures">
       <h2 class="section__title reveal" data-i18n="ventures.title">Venturalar</h2>
       <div class="cards">
-        <article class="card reveal">
-          <span class="card__tag" data-i18n="insayr.tag">Tourism tech · 2022 — hozir</span>
-          <h3>Insayr</h3>
-          <p data-i18n="insayr.desc">Turizm sohasidagi texnologik platforma. Asoschi va marketing menejeri.</p>
+        <article class="win reveal" style="--c: var(--blue)">
+          <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">insayr.app</span></div>
+          <div class="win__body">
+            <span class="card__tag" data-i18n="insayr.tag">Tourism tech · 2022 — hozir</span>
+            <h3>Insayr</h3>
+            <p data-i18n="insayr.desc">Turizm sohasidagi texnologik platforma. Asoschi va marketing menejeri.</p>
+          </div>
         </article>
-        <article class="card reveal">
-          <span class="card__tag" data-i18n="tezol.tag">Logistika · 2023 — hozir</span>
-          <h3>TEZOL</h3>
-          <p data-i18n="tezol.desc">Yetkazib berish va logistika startapi. Asoschi.</p>
+        <article class="win reveal" style="--c: var(--pink)">
+          <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">tezol.app</span></div>
+          <div class="win__body">
+            <span class="card__tag" data-i18n="tezol.tag">Logistika · 2023 — hozir</span>
+            <h3>TEZOL</h3>
+            <p data-i18n="tezol.desc">Yetkazib berish va logistika startapi. Asoschi.</p>
+          </div>
         </article>
       </div>
     </section>
@@ -77,57 +95,70 @@
     <!-- 4. DIZAYN VA 3D -->
     <section class="section container" id="design">
       <h2 class="section__title reveal" data-i18n="design.title">Dizayn va 3D</h2>
-      <p class="muted reveal" data-i18n="design.lead">Blender, Figma, After Effects va Canva'da qilingan ishlar.</p>
-      <!-- Haqiqiy ish qo'shish: <img src="assets/img/nom.jpg" alt="..."> ni .tile ichiga qo'ying -->
-      <div class="gallery">
-        <figure class="tile tile--wide reveal t1"><span class="tile__tool">Blender</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t2"><span class="tile__tool">Figma</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t3"><span class="tile__tool">After Effects</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t4"><span class="tile__tool">Canva</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t5"><span class="tile__tool">Blender</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
-      </div>
+      <article class="win reveal" style="--c: var(--yellow)">
+        <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">gallery/</span></div>
+        <div class="win__body">
+          <p class="muted" data-i18n="design.lead">Blender, Figma, After Effects va Canva'da qilingan ishlar.</p>
+          <!-- Haqiqiy ish qo'shish: <img src="assets/img/nom.jpg" alt="..."> ni .tile ichiga qo'ying -->
+          <div class="gallery">
+            <figure class="tile tile--wide t1"><span class="tile__tool">Blender</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
+            <figure class="tile t2"><span class="tile__tool">Figma</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
+            <figure class="tile t3"><span class="tile__tool">After Effects</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
+            <figure class="tile t4"><span class="tile__tool">Canva</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
+            <figure class="tile t5"><span class="tile__tool">Blender</span><figcaption data-i18n="design.soon">Ish tez orada qo'shiladi</figcaption></figure>
+          </div>
+        </div>
+      </article>
     </section>
 
     <!-- 5. MEN HAQIMDA -->
     <section class="section container" id="about">
       <h2 class="section__title reveal" data-i18n="about.title">Men haqimda</h2>
-      <div class="about">
-        <div class="about__photo reveal">
-          <span>HA</span>
-          <!-- Rasmingizni assets/img/hasan.jpg nomi bilan qo'ysangiz, avtomatik chiqadi -->
-          <img src="assets/img/hasan.jpg" alt="Hasan Azimboyev" onerror="this.remove()">
+      <article class="win reveal" style="--c: var(--mint)">
+        <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">about.doc</span></div>
+        <div class="win__body about">
+          <div class="about__photo">
+            <span>HA</span>
+            <!-- Rasmingizni assets/img/hasan.jpg nomi bilan qo'ysangiz, avtomatik chiqadi -->
+            <img src="assets/img/hasan.jpg" alt="Hasan Azimboyev" onerror="this.remove()">
+          </div>
+          <div class="about__body">
+            <p data-i18n="about.p1">Men texnologiya va marketing kesishmasida ishlaydigan tadbirkorman.</p>
+            <p data-i18n="about.p2">Kompyuter injiniringi bo'yicha TATU'da o'qiganman.</p>
+            <h3 data-i18n="about.skills">Ko'nikmalar</h3>
+            <ul class="chips">
+              <li>Marketing</li><li>Branding</li><li>Figma</li><li>Blender</li><li>After Effects</li><li>Canva</li><li>Pitch deck</li><li>Mentoring</li>
+            </ul>
+            <h3 data-i18n="about.timeline">Yo'l</h3>
+            <ol class="timeline">
+              <li><b>2020</b><span data-i18n="tl.2020">Marketing va startap mentorligini boshladim</span></li>
+              <li><b>2021</b><span data-i18n="tl.2021">TATU, Kompyuter injiniringi (2021–2025)</span></li>
+              <li><b>2022</b><span data-i18n="tl.2022">Insayr asos solindi, freelance marketing va dizayn</span></li>
+              <li><b>2023</b><span data-i18n="tl.2023">TEZOL asos solindi</span></li>
+            </ol>
+            <p class="muted" data-i18n="about.langs">Tillar: o'zbek (ona tili), rus (yaxshi), ingliz (o'rta)</p>
+          </div>
         </div>
-        <div class="about__body">
-          <p class="reveal" data-i18n="about.p1">Men texnologiya va marketing kesishmasida ishlaydigan tadbirkorman.</p>
-          <p class="reveal" data-i18n="about.p2">Kompyuter injiniringi bo'yicha TATU'da o'qiganman.</p>
-          <h3 class="reveal" data-i18n="about.skills">Ko'nikmalar</h3>
-          <ul class="chips reveal">
-            <li>Marketing</li><li>Branding</li><li>Figma</li><li>Blender</li><li>After Effects</li><li>Canva</li><li>Pitch deck</li><li>Mentoring</li>
-          </ul>
-          <h3 class="reveal" data-i18n="about.timeline">Yo'l</h3>
-          <ol class="timeline reveal">
-            <li><b>2020</b><span data-i18n="tl.2020">Marketing va startap mentorligini boshladim</span></li>
-            <li><b>2021</b><span data-i18n="tl.2021">TATU, Kompyuter injiniringi (2021–2025)</span></li>
-            <li><b>2022</b><span data-i18n="tl.2022">Insayr asos solindi, freelance marketing va dizayn</span></li>
-            <li><b>2023</b><span data-i18n="tl.2023">TEZOL asos solindi</span></li>
-          </ol>
-          <p class="muted reveal" data-i18n="about.langs">Tillar: o'zbek (ona tili), rus (yaxshi), ingliz (o'rta)</p>
-        </div>
-      </div>
+      </article>
     </section>
 
     <!-- 6. ALOQA -->
-    <section class="section container contact" id="contact">
-      <h2 class="section__title reveal" data-i18n="contact.title">Keling, birga ishlaymiz</h2>
-      <p class="muted reveal" data-i18n="contact.lead">Loyiha, hamkorlik yoki mentorlik bo'yicha yozing.</p>
-      <div class="contact__links reveal">
-        <a class="btn" href="https://t.me/Azimboyev_h" target="_blank" rel="noopener">Telegram</a>
-        <a class="btn btn--ghost" href="https://instagram.com/hasan.az1mov" target="_blank" rel="noopener">Instagram</a>
-      </div>
+    <section class="section container" id="contact">
+      <article class="win reveal" style="--c: var(--pink)">
+        <div class="win__bar"><span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win__title">contact.msg</span></div>
+        <div class="win__body contact">
+          <h2 class="section__title" data-i18n="contact.title">Keling, birga ishlaymiz</h2>
+          <p class="muted" data-i18n="contact.lead">Loyiha, hamkorlik yoki mentorlik bo'yicha yozing.</p>
+          <div class="contact__links">
+            <a class="btn" href="https://t.me/Azimboyev_h" target="_blank" rel="noopener">Telegram</a>
+            <a class="btn btn--ghost" href="https://instagram.com/hasan.az1mov" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 
-  <footer class="footer container">
+  <footer class="statusbar">
     <span>© <span id="year">2026</span> Hasan Azimboyev</span>
     <a href="#top" data-i18n="footer.top">Tepaga ↑</a>
   </footer>

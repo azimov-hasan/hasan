@@ -60,5 +60,13 @@ const counter = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 document.querySelectorAll("[data-count]").forEach(el => counter.observe(el));
 
+// ===== Menyu panelidagi soat (Toshkent vaqti) =====
+const clock = document.getElementById("clock");
+function tick() {
+  if (!clock) return;
+  clock.textContent = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tashkent" });
+}
+tick(); setInterval(tick, 30000);
+
 // ===== Joriy yil =====
 document.getElementById("year").textContent = new Date().getFullYear();
