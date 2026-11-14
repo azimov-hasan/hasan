@@ -1,0 +1,209 @@
+/* =========================================================
+   HASAN — 3D interaktiv portfolio
+   Qora studiya, iliq oltin yorug'lik, shaffof shisha ekranlar.
+   ========================================================= */
+:root {
+  --bg: #050505;
+  --text: #eaf4f8;
+  --muted: #9fb3bd;
+  --cyan: #66e0ff;
+  --gold: #f0c987;
+  --glass: rgba(8, 14, 20, 0.66);
+  --glass-line: rgba(102, 224, 255, 0.38);
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", var(--font-body);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --card-w: 480px;
+  --card-h: clamp(200px, 32vh, 290px);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.55;
+  overflow: hidden; -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+/* yumshoq paydo/yo'q bo'lish */
+.fade { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .6s ease, visibility 0s .6s; }
+.fade.is-visible { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .6s ease; }
+
+/* ===== FON ===== */
+.stage { position: fixed; inset: 0; background: #000; overflow: hidden; }
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; opacity: 0; transition: opacity 1.8s ease, transform 2.6s cubic-bezier(.45, 0, .2, 1); }
+.bg.is-in { opacity: 1; }
+.bg--video { transition: none; }
+body[data-stage="rotating"] .bg--still, body[data-stage="rotating"] .bg--dim,
+body[data-stage="dropping"] .bg--still, body[data-stage="dropping"] .bg--dim,
+body[data-stage="carousel"] .bg--still, body[data-stage="carousel"] .bg--dim,
+body[data-stage="detail"] .bg--still, body[data-stage="detail"] .bg--dim { transform: scale(1.05); }
+.stage__shade { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, transparent 35%, rgba(0, 0, 0, .55) 100%); pointer-events: none; }
+body.degraded .bg { display: none; }
+body.degraded .stage { background: radial-gradient(ellipse at 50% 0%, #2a2114 0%, #050505 60%); }
+
+/* ===== YUKLANISH ===== */
+.loader {
+  position: fixed; inset: 0; z-index: 100; background: var(--bg); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 18px; padding: 24px; text-align: center;
+  transition: opacity .9s ease;
+}
+.loader.is-done { opacity: 0; pointer-events: none; }
+.loader__logo {
+  width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center;
+  font: 700 2.6rem var(--font-head); color: var(--cyan); border: 1px solid var(--glass-line);
+  box-shadow: 0 0 40px rgba(102, 224, 255, .18), inset 0 0 24px rgba(102, 224, 255, .08);
+}
+.loader__text { margin: 0; color: var(--muted); letter-spacing: .06em; font-size: .95rem; max-width: 38ch; }
+.loader__bar { width: min(320px, 70vw); height: 2px; background: rgba(255, 255, 255, .12); overflow: hidden; }
+.loader__bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.loader__pct { margin: 0; font-variant-numeric: tabular-nums; color: var(--muted); font-size: .85rem; }
+.enter {
+  margin-top: 8px; padding: 12px 38px; border-radius: 999px; background: transparent; color: var(--text);
+  border: 1px solid var(--glass-line); letter-spacing: .24em; font-weight: 600; font-size: .85rem;
+  transition: background .25s, box-shadow .25s, opacity .25s;
+}
+.enter:not(:disabled):hover { background: rgba(102, 224, 255, .12); box-shadow: 0 0 28px rgba(102, 224, 255, .25); }
+.enter:disabled { opacity: .35; cursor: default; }
+
+/* ===== SKIP VA ASOSIY TUGMA ===== */
+.skip {
+  position: fixed; z-index: 40; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, .45); border: 1px solid rgba(255, 255, 255, .25); border-radius: 999px;
+  padding: 9px 18px; font-size: .85rem; color: var(--text); backdrop-filter: blur(8px);
+}
+.skip:hover { border-color: var(--cyan); }
+.cta {
+  position: fixed; z-index: 40; top: max(22px, calc(env(safe-area-inset-top) + 14px)); left: 50%; transform: translateX(-50%);
+  max-width: 92vw; padding: 15px 34px; border-radius: 999px; text-align: center;
+  background: rgba(14, 12, 8, .55); border: 1px solid rgba(240, 201, 135, .6); color: var(--text);
+  letter-spacing: .14em; font-weight: 600; font-size: clamp(.72rem, 2.4vw, .92rem); backdrop-filter: blur(10px);
+  box-shadow: 0 0 36px rgba(240, 201, 135, .18);
+  transition: opacity .6s ease, visibility 0s .6s, transform .25s ease, box-shadow .25s ease;
+}
+.cta.is-visible { transition: opacity .6s ease, transform .25s ease, box-shadow .25s ease; }
+.cta:hover { transform: translateX(-50%) scale(1.04); box-shadow: 0 0 48px rgba(240, 201, 135, .34); }
+
+/* ===== HOLOGRAMMA KARUSELI ===== */
+.holo {
+  position: fixed; z-index: 30; left: 0; right: 0; top: clamp(70px, 11vh, 120px); height: calc(var(--card-h) + 70px);
+  perspective: 1500px; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab;
+  transition: opacity .6s ease, visibility 0s .6s, transform .7s var(--ease), filter .7s ease;
+}
+.holo.is-visible { transition: opacity .6s ease, transform .7s var(--ease), filter .7s ease; }
+.holo:active { cursor: grabbing; }
+.holo.is-dimmed { transform: scale(.9); filter: blur(2px) brightness(.5); pointer-events: none; }
+.holo__track { position: absolute; inset: 0; transform-style: preserve-3d; }
+.holo__item {
+  position: absolute; left: 50%; top: 50%; width: var(--card-w); height: var(--card-h);
+  margin-left: calc(var(--card-w) / -2); margin-top: calc(var(--card-h) / -2); will-change: transform, opacity; outline-offset: 6px;
+}
+.holo__card {
+  position: relative; width: 100%; height: 100%; padding: 26px 28px; border-radius: 18px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02) 40%), var(--glass);
+  backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid var(--glass-line);
+  box-shadow: 0 0 30px rgba(102, 224, 255, .14), inset 0 0 40px rgba(102, 224, 255, .05);
+  transition: box-shadow .3s ease, border-color .3s ease;
+}
+.holo__card::before { /* nozik cyan chekka yorug'ligi */
+  content: ""; position: absolute; left: 12%; right: 12%; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: .8;
+}
+.holo__item.is-center .holo__card { border-color: rgba(102, 224, 255, .7); box-shadow: 0 0 46px rgba(102, 224, 255, .26), inset 0 0 44px rgba(102, 224, 255, .08); }
+.holo__item.is-center:hover .holo__card { box-shadow: 0 0 60px rgba(102, 224, 255, .38), inset 0 0 44px rgba(102, 224, 255, .1); }
+.icon { width: 38px; height: 38px; color: var(--cyan); display: grid; place-items: center; margin-bottom: 4px; }
+.icon svg { width: 100%; height: 100%; }
+.holo__title { margin: 0; font: 600 clamp(1.2rem, 3.2vw, 1.7rem) var(--font-head); letter-spacing: .04em; }
+.holo__sub { margin: 0; color: var(--muted); font-size: clamp(.85rem, 2.2vw, .98rem); max-width: 30ch; }
+.holo__arrow { position: absolute; right: 22px; bottom: 16px; color: var(--cyan); font-size: 1.2rem; }
+.holo__eyebrow { margin: 0; color: var(--muted); letter-spacing: .22em; font-size: .8rem; }
+.holo__card--hero { padding-left: clamp(22px, 5vw, 44px); }
+.holo__card--hero .holo__title { font-size: clamp(1.7rem, 5.4vw, 2.7rem); letter-spacing: 0; }
+.holo__more { margin: 14px 0 0; color: var(--cyan); font-size: .85rem; }
+.hero-mark {
+  position: absolute; right: clamp(20px, 6%, 56px); top: 50%; width: clamp(70px, 18%, 110px); aspect-ratio: 1; transform: translateY(-50%);
+  display: grid; place-items: center; font: 700 clamp(2.4rem, 8vw, 4.2rem) var(--font-head);
+  background: linear-gradient(135deg, #fff, var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 0 18px rgba(102, 224, 255, .5));
+}
+.hero-mark::after {
+  content: ""; position: absolute; inset: -34% -62%; border: 1px solid rgba(102, 224, 255, .55); border-radius: 50%; transform: rotate(-18deg);
+}
+
+/* tepadan tushish: markaz birinchi, so'ng atrofga, yengil damping */
+.holo.is-dropping .holo__card { opacity: 0; animation: drop 1.1s var(--ease) both; animation-delay: calc(var(--i) * .15s); }
+@keyframes drop {
+  0% { opacity: 0; transform: translateY(-75vh) scale(.92); }
+  15% { opacity: 1; }
+  72% { transform: translateY(9px) scale(1); }
+  100% { opacity: 1; transform: none; }
+}
+
+.holo__nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 200; width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(0, 0, 0, .4); border: 1px solid var(--glass-line); font-size: 1.6rem; line-height: 1; backdrop-filter: blur(8px);
+  transition: background .2s, opacity .2s;
+}
+.holo__nav:hover:not(:disabled) { background: rgba(102, 224, 255, .15); }
+.holo__nav:disabled { opacity: .25; cursor: default; }
+.holo__nav--prev { left: max(14px, env(safe-area-inset-left)); }
+.holo__nav--next { right: max(14px, env(safe-area-inset-right)); }
+.holo__hint {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0; text-align: center; color: var(--muted); font-size: .85rem;
+  opacity: 0; transition: opacity .5s ease; padding: 0 20px; pointer-events: none;
+}
+.holo__hint.is-visible { opacity: .9; }
+
+/* ===== BATAFSIL KO'RINISH ===== */
+.detail { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 70px 16px 24px; }
+.detail[hidden] { display: none; }
+.detail__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .62); backdrop-filter: blur(4px); }
+.detail__panel {
+  position: relative; width: min(860px, 100%); max-height: 100%; overflow-y: auto; border-radius: 20px; padding: clamp(22px, 4vw, 44px);
+  background: linear-gradient(160deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02) 40%), rgba(8, 14, 20, .82);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(102, 224, 255, .55); box-shadow: 0 0 60px rgba(102, 224, 255, .22);
+}
+.detail__cat { margin: 0 0 8px; color: var(--cyan); letter-spacing: .22em; text-transform: uppercase; font-size: .78rem; }
+.detail__title { margin: 0; font: 600 clamp(1.7rem, 5vw, 2.6rem) var(--font-head); }
+.detail__desc { margin: 6px 0 20px; color: var(--muted); }
+.detail__body p { max-width: 62ch; }
+.detail__list { margin: 18px 0; padding-left: 20px; display: grid; gap: 8px; }
+.detail__list li::marker { color: var(--cyan); }
+.detail__media { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 18px 0; }
+.detail__media img, .detail__media video { width: 100%; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .15); }
+.detail__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.btn {
+  display: inline-flex; padding: 10px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: .9rem;
+  border: 1px solid var(--glass-line); background: rgba(102, 224, 255, .08); transition: background .2s, box-shadow .2s;
+}
+.btn:hover { background: rgba(102, 224, 255, .2); box-shadow: 0 0 24px rgba(102, 224, 255, .3); }
+.back {
+  position: fixed; z-index: 70; top: max(18px, env(safe-area-inset-top)); left: max(18px, env(safe-area-inset-left));
+  padding: 10px 20px; border-radius: 999px; background: rgba(0, 0, 0, .5); border: 1px solid var(--glass-line);
+  letter-spacing: .12em; font-size: .78rem; font-weight: 600; backdrop-filter: blur(8px);
+}
+.back:hover { background: rgba(102, 224, 255, .15); }
+
+/* ===== BOSHQA ===== */
+.badge { position: fixed; z-index: 20; left: max(16px, env(safe-area-inset-left)); bottom: max(14px, env(safe-area-inset-bottom)); margin: 0; font-size: .72rem; color: rgba(255, 255, 255, .45); max-width: 55vw; }
+.badge[hidden] { display: none; }
+.nojs { display: none; position: relative; z-index: 200; padding: 40px 20px; max-width: 60ch; margin: 0 auto; }
+
+/* ===== MOBIL ===== */
+@media (max-width: 700px) {
+  .holo { top: clamp(86px, 15vh, 120px); }
+  .holo__nav { width: 40px; height: 40px; }
+  .skip { font-size: .78rem; padding: 8px 14px; }
+  .badge { display: none; }
+  .holo__hint { bottom: -6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bg, .holo, .loader, .fade { transition-duration: .01s; }
+  .holo.is-dropping .holo__card { animation: none; opacity: 1; }
+}

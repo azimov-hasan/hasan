@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hasan Azimboyev — 3D interaktiv portfolio</title>
+  <meta name="description" content="Hasan Azimboyev: Insayr va TEZOL asoschisi, marketing menejeri va dizayner. Interaktiv portfolio.">
+  <meta name="theme-color" content="#050505">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hasan Azimboyev — 3D interaktiv portfolio">
+  <meta property="og:description" content="Marketing menejeri, dasturchi va tadbirkor.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050505'/%3E%3Ctext x='32' y='43' font-size='34' font-family='Arial' font-weight='700' text-anchor='middle' fill='%2366e0ff'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <noscript><style>#loader{display:none}.nojs{display:block}</style></noscript>
+</head>
+<body data-stage="loading">
+  <h1 class="sr-only">Hasan Azimboyev — marketing menejeri, dasturchi va tadbirkor</h1>
+
+  <!-- FON: videolar yoki vaqtincha rasmlar -->
+  <div class="stage" aria-hidden="true">
+    <img class="bg bg--still" id="bgStill" src="assets/img/studio-still.jpg" alt="">
+    <img class="bg bg--dim" id="bgDim" src="assets/img/studio-dim.jpg" alt="">
+    <video class="bg bg--video" id="vIntro" muted playsinline preload="none"></video>
+    <video class="bg bg--video" id="vRotate" muted playsinline preload="none"></video>
+    <div class="stage__shade"></div>
+  </div>
+
+  <!-- YUKLANISH -->
+  <div class="loader" id="loader">
+    <div class="loader__logo" aria-hidden="true">H</div>
+    <p class="loader__text" id="loaderText">Tajriba tayyorlanmoqda...</p>
+    <div class="loader__bar" aria-hidden="true"><i id="loaderBar"></i></div>
+    <p class="loader__pct" id="loaderPct" aria-live="polite">0%</p>
+    <button class="enter" id="enterBtn" disabled>KIRISH</button>
+  </div>
+
+  <button class="skip fade" id="skipBtn">Introni o'tkazib yuborish →</button>
+  <button class="cta fade" id="ctaBtn"></button>
+
+  <!-- HOLOGRAMMA KARUSELI -->
+  <section class="holo fade" id="holo" aria-label="Portfolio ekranlari">
+    <div class="holo__track" id="track"></div>
+    <button class="holo__nav holo__nav--prev" id="prevBtn" aria-label="Oldingi ekran">‹</button>
+    <button class="holo__nav holo__nav--next" id="nextBtn" aria-label="Keyingi ekran">›</button>
+    <p class="holo__hint" id="hint">Suring yoki o'qlarni bosing. Ochish uchun markaziy ekranni bosing.</p>
+  </section>
+
+  <!-- BATAFSIL KO'RINISH -->
+  <section class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="detail__backdrop" id="detailBackdrop"></div>
+    <button class="back" id="backBtn">← EKRANLARGA QAYTISH</button>
+    <article class="detail__panel" id="detailPanel" tabindex="-1"></article>
+  </section>
+
+  <p class="badge" id="badge" hidden>Vaqtincha fon: Blender videolari kutilmoqda</p>
+
+  <noscript>
+    <div class="nojs">
+      <h2>Hasan Azimboyev</h2>
+      <p>Marketing menejeri, dasturchi va tadbirkor. Insayr (turizm texnologiyasi) va TEZOL (logistika) asoschisi.</p>
+      <p>Telegram: <a href="https://t.me/Azimboyev_h">@Azimboyev_h</a> · Instagram: <a href="https://instagram.com/hasan.az1mov">hasan.az1mov</a></p>
+      <p>Interaktiv portfolioni ko'rish uchun JavaScript'ni yoqing.</p>
+    </div>
+  </noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
