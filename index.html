@@ -2,170 +2,84 @@
 <html lang="uz">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hasan Azimboyev — Startup asoschisi, marketing va dizayn</title>
-  <meta name="description" content="Hasan Azimboyev: Insayr va TEZOL asoschisi, marketing menejeri va dizayner. Portfolio.">
-  <meta name="theme-color" content="#0b0d12">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hasan Azimboyev — 3D interaktiv portfolio</title>
+  <meta name="description" content="Hasan Azimboyev: Insayr va TEZOL asoschisi, marketing menejeri va dizayner. Interaktiv portfolio.">
+  <meta name="theme-color" content="#050505">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Hasan Azimboyev — Startup asoschisi, marketing va dizayn">
-  <meta property="og:description" content="Insayr va TEZOL asoschisi, marketing menejeri va dizayner.">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0d12'/%3E%3Ctext x='32' y='42' font-size='30' font-family='Arial' font-weight='700' text-anchor='middle' fill='%234f8cff'%3EHA%3C/text%3E%3C/svg%3E">
+  <meta property="og:title" content="Hasan Azimboyev — 3D interaktiv portfolio">
+  <meta property="og:description" content="Marketing menejeri, dasturchi va tadbirkor.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050505'/%3E%3Ctext x='32' y='43' font-size='34' font-family='Arial' font-weight='700' text-anchor='middle' fill='%2366e0ff'%3EH%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <noscript><style>#loader{display:none}body.is-loading{overflow:auto}.reveal{opacity:1;transform:none}</style></noscript>
+  <noscript><style>#loader{display:none}.nojs{display:block}.experience{display:none}</style></noscript>
 </head>
-<body class="is-loading">
+<body data-stage="loading">
+  <h1 class="sr-only">Hasan Azimboyev — marketing menejeri, dasturchi va tadbirkor</h1>
 
-  <!-- YUKLANISH EKRANI -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <span class="loader__name">Hasan Azimboyev</span>
-    <strong class="loader__pct"><span id="loaderPct">0</span><small>%</small></strong>
+  <!-- YUKLANISH -->
+  <div class="loader" id="loader">
+    <div class="loader__logo" aria-hidden="true">H</div>
+    <p class="loader__text" id="loaderText">Tajriba tayyorlanmoqda...</p>
+    <div class="loader__bar" aria-hidden="true"><i id="loaderBar"></i></div>
+    <p class="loader__pct" id="loaderPct" aria-live="polite">0%</p>
+    <button class="enter" id="enterBtn" disabled>KIRISH</button>
   </div>
 
-  <div class="progress" id="progress" aria-hidden="true"></div>
-  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <!-- 1-QISM: SAHNA (bitta ekran balandligida) -->
+  <section class="experience" id="experience">
+    <div class="stage" aria-hidden="true">
+      <img class="bg bg--still" id="bgStill" src="assets/img/studio-still.jpg" alt="">
+      <img class="bg bg--dim" id="bgDim" src="assets/img/studio-dim.jpg" alt="">
+      <video class="bg bg--video" id="vIntro" muted playsinline preload="none"></video>
+      <video class="bg bg--video" id="vRotate" muted playsinline preload="none"></video>
+      <div class="stage__shade"></div>
+    </div>
 
-  <!-- NAVIGATSIYA -->
-  <header class="nav" id="top">
-    <a class="nav__logo" href="#top">HA<span>.</span></a>
-    <nav class="nav__links" id="navLinks" aria-label="Asosiy menyu">
-      <a href="#services">Nima qilaman</a>
-      <a href="#ventures">Loyihalar</a>
-      <a href="#design">Dizayn</a>
-      <a href="#about">Men haqimda</a>
-      <a href="#contact" class="btn btn--small">Bog'lanish</a>
-    </nav>
-    <button class="nav__toggle" id="navToggle" aria-label="Menyuni ochish" aria-expanded="false">
-      <span></span><span></span>
-    </button>
-  </header>
+    <button class="skip fade" id="skipBtn">Introni o'tkazib yuborish →</button>
+    <button class="exit fade" id="exitBtn">← CHIQISH</button>
+    <button class="cta fade" id="ctaBtn"></button>
 
-  <main>
-    <!-- 1. HERO -->
-    <section class="hero container">
-      <div class="hero__text">
-        <p class="eyebrow reveal">Startup asoschisi · Marketing · Dizayn</p>
-        <h1 class="hero__title reveal">Men g'oyani <em>mahsulotga</em> va mahsulotni brendga aylantiraman.</h1>
-        <p class="hero__lead reveal">Salom, men Hasan. Insayr va TEZOL asoschisiman, 50 dan ortiq yosh tadbirkorga mentorlik qilganman.</p>
-        <div class="hero__cta reveal">
-          <a href="#ventures" class="btn">Loyihalarni ko'rish</a>
-          <a href="#contact" class="btn btn--ghost">Bog'lanish</a>
-        </div>
-      </div>
-      <!-- Sichqonchaga javob beradigan 3D to'r. Blender ishi tayyor bo'lgach shu o'rniga qo'yiladi -->
-      <div class="hero__visual reveal" aria-hidden="true">
-        <canvas id="wire"></canvas>
-      </div>
-    </section>
+    <!-- HOLOGRAMMA KARUSELI -->
+    <div class="holo fade" id="holo" aria-label="Portfolio ekranlari">
+      <div class="holo__track" id="track"></div>
+      <button class="holo__nav holo__nav--prev" id="prevBtn" aria-label="Oldingi ekran">‹</button>
+      <button class="holo__nav holo__nav--next" id="nextBtn" aria-label="Keyingi ekran">›</button>
+      <p class="holo__hint" id="hint">Suring yoki o'qlarni bosing. Ochish uchun markaziy ekranni bosing.</p>
+    </div>
 
-    <!-- 2. RAQAMLAR -->
-    <section class="stats container" aria-label="Natijalar">
-      <div class="stat reveal"><strong data-count="35000" data-prefix="$" data-suffix="+">$35,000+</strong><span>yutilgan grantlar</span></div>
-      <div class="stat reveal"><strong data-count="50" data-suffix="+">50+</strong><span>mentorlik qilingan yoshlar</span></div>
-      <div class="stat reveal"><strong data-count="2" data-suffix="">2</strong><span>asos solingan startap</span></div>
-      <div class="stat reveal"><strong data-count="5" data-suffix="+">5+</strong><span>yillik tajriba</span></div>
-    </section>
+    <button class="more fade" id="moreBtn">Barcha ma'lumotlar <span aria-hidden="true">↓</span></button>
+    <p class="badge" id="badge" hidden>Vaqtincha fon: Blender videolari kutilmoqda</p>
+  </section>
 
-    <!-- 3. NIMA QILAMAN -->
-    <section class="section container" id="services">
-      <h2 class="section__title reveal">Nima qilaman</h2>
-      <div class="cards">
-        <article class="card reveal">
-          <span class="card__tag">Startap</span>
-          <h3>G'oyadan mahsulotgacha</h3>
-          <p>G'oyani tekshirish, MVP yaratish va birinchi mijozlarni topish. Insayr va TEZOL shu yo'ldan o'tgan.</p>
-        </article>
-        <article class="card reveal">
-          <span class="card__tag">Marketing</span>
-          <h3>Brend va o'sish</h3>
-          <p>Brend kimligi, kontent strategiyasi, raqamli marketing va bozorga chiqish rejasi.</p>
-        </article>
-        <article class="card reveal">
-          <span class="card__tag">Dizayn</span>
-          <h3>Figma, 3D va harakat</h3>
-          <p>Interfeys, ijtimoiy tarmoq dizayni, Blender'da 3D va After Effects'da animatsiya.</p>
-        </article>
-      </div>
-    </section>
+  <!-- 2-QISM: PASTGA SURILGANDA BARCHA MA'LUMOTLAR (screens.js dan chiziladi) -->
+  <main class="info" id="info" aria-label="Barcha ma'lumotlar"></main>
 
-    <!-- 4. VENTURALAR -->
-    <section class="section container" id="ventures">
-      <h2 class="section__title reveal">Venturalar</h2>
-      <div class="cards cards--two">
-        <article class="card reveal">
-          <span class="card__tag">Tourism tech · 2022 — hozir</span>
-          <h3>Insayr</h3>
-          <p>Turizm sohasidagi texnologik platforma. Asoschi va marketing menejeri.</p>
-        </article>
-        <article class="card reveal">
-          <span class="card__tag">Logistika · 2023 — hozir</span>
-          <h3>TEZOL</h3>
-          <p>Yetkazib berish va logistika startapi. Asoschi.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- 5. DIZAYN VA 3D -->
-    <section class="section container" id="design">
-      <h2 class="section__title reveal">Dizayn va 3D</h2>
-      <p class="muted reveal">Blender, Figma, After Effects va Canva'da qilingan ishlar.</p>
-      <!-- Haqiqiy ish qo'shish: <img src="assets/img/nom.jpg" alt="..."> ni .tile ichiga qo'ying -->
-      <div class="gallery">
-        <figure class="tile tile--wide reveal t1"><span class="tile__tool">Blender</span><figcaption>Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t2"><span class="tile__tool">Figma</span><figcaption>Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t3"><span class="tile__tool">After Effects</span><figcaption>Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t4"><span class="tile__tool">Canva</span><figcaption>Ish tez orada qo'shiladi</figcaption></figure>
-        <figure class="tile reveal t5"><span class="tile__tool">Blender</span><figcaption>Ish tez orada qo'shiladi</figcaption></figure>
-      </div>
-    </section>
-
-    <!-- 6. MEN HAQIMDA -->
-    <section class="section container" id="about">
-      <h2 class="section__title reveal">Men haqimda</h2>
-      <div class="about">
-        <div class="about__photo reveal">
-          <span>HA</span>
-          <!-- Rasmingizni assets/img/hasan.jpg nomi bilan qo'ysangiz, avtomatik chiqadi -->
-          <img src="assets/img/hasan.jpg" alt="Hasan Azimboyev" onerror="this.remove()">
-        </div>
-        <div class="about__body">
-          <p class="reveal">Men texnologiya va marketing kesishmasida ishlaydigan tadbirkorman. 2020-yildan beri startaplarni boshqaraman, milliy darajadagi tanlovlarda qatnashaman va yoshlarga mahsulot yaratishda mentorlik qilaman.</p>
-          <p class="reveal">Kompyuter injiniringi bo'yicha TATU'da o'qiganman, shuning uchun g'oyani ham dizayn, ham texnik nuqtai nazardan baholay olaman.</p>
-          <h3 class="reveal">Ko'nikmalar</h3>
-          <ul class="chips reveal">
-            <li>Marketing</li><li>Branding</li><li>Figma</li><li>Blender</li><li>After Effects</li><li>Canva</li><li>Pitch deck</li><li>Mentoring</li>
-          </ul>
-          <h3 class="reveal">Yo'l</h3>
-          <ol class="timeline reveal">
-            <li><b>2020</b><span>Marketing va startap mentorligini boshladim</span></li>
-            <li><b>2021</b><span>TATU, Kompyuter injiniringi (2021–2025)</span></li>
-            <li><b>2022</b><span>Insayr asos solindi, freelance marketing va dizayn</span></li>
-            <li><b>2023</b><span>TEZOL asos solindi</span></li>
-          </ol>
-          <p class="muted reveal">Tillar: o'zbek (ona tili), rus (yaxshi), ingliz (o'rta)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. ALOQA -->
-    <section class="section container contact" id="contact">
-      <h2 class="section__title reveal">Keling, birga ishlaymiz</h2>
-      <p class="muted reveal">Loyiha, hamkorlik yoki mentorlik bo'yicha yozing.</p>
-      <div class="contact__links reveal">
-        <a class="btn" href="https://t.me/Azimboyev_h" target="_blank" rel="noopener">Telegram</a>
-        <a class="btn btn--ghost" href="https://instagram.com/hasan.az1mov" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer container">
+  <footer class="footer">
     <span>© <span id="year">2026</span> Hasan Azimboyev</span>
-    <a href="#top">Tepaga ↑</a>
+    <button class="footer__top" id="topBtn">↑ Studiyaga qaytish</button>
   </footer>
 
+  <!-- BATAFSIL KO'RINISH -->
+  <section class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="detail__backdrop" id="detailBackdrop"></div>
+    <button class="back" id="backBtn">← EKRANLARGA QAYTISH</button>
+    <article class="detail__panel" id="detailPanel" tabindex="-1"></article>
+  </section>
+
+  <noscript>
+    <div class="nojs">
+      <h2>Hasan Azimboyev</h2>
+      <p>Marketing menejeri, dasturchi va tadbirkor. Insayr (turizm texnologiyasi) va TEZOL (logistika) asoschisi. TATU, Kompyuter injiniringi (2021–2025).</p>
+      <p>Telegram: <a href="https://t.me/Azimboyev_h">@Azimboyev_h</a> · Instagram: <a href="https://instagram.com/hasan.az1mov">hasan.az1mov</a></p>
+      <p>Interaktiv portfolioni ko'rish uchun JavaScript'ni yoqing.</p>
+    </div>
+  </noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/screens.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

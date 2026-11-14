@@ -57,9 +57,17 @@ window.PORTFOLIO_SCREENS = [
     content: "Startap qurish, marketing va dizayn: uchala yo'nalishda amaliy tajriba.",
     highlights: [
       "Startap mentori va tadbirkor (2021 — hozir): President Tech Awards, Mirzo Ulug'bek innovatsiya forumi, Hack Unicorn lageri va InnoWeek kabi yirik tadbirlarda qatnashgan; milliy tanlovlarda $35 000 dan ortiq grant yutgan; 50+ yoshga mentorlik qilgan",
-      "Insayr, asoschi va marketing menejeri (2022 — hozir): turizm texnologiyasi platformasini yaratib ishga tushirgan; kontent strategiyasi, brend kimligi va raqamli marketingni boshqargan; foydalanuvchilar bazasini o'stirgan va mahalliy biznes hamkorliklarini yo'lga qo'ygan",
-      "TEZOL, asoschi (2023 — hozir): yetkazib berish va logistika startapini ishlab chiqqan; mahsulot rivoji va operatsiyalarni boshqargan; bozorga chiqish strategiyasi va pitch deck tayyorlagan",
       "Freelancer, raqamli marketing va dizayn (2022 — hozir): brending, ijtimoiy tarmoq dizayni va UI/UX xizmatlari; asboblar: Figma, Canva, After Effects Pro, Blender"
+    ]
+  },
+  {
+    id: "projects", order: 6, visible: true, icon: "briefcase",
+    title: "MY PROJECTS", category: "loyihalar",
+    description: "Insayr, TEZOL va boshqa loyihalar",
+    content: "Asosiy loyihalarim: turizm texnologiyasi va logistika startaplari.",
+    highlights: [
+      "Insayr, asoschi va marketing menejeri (2022 — hozir): turizm texnologiyasi platformasini yaratib ishga tushirgan; kontent strategiyasi, brend kimligi va raqamli marketingni boshqargan; foydalanuvchilar bazasini o'stirgan va mahalliy biznes hamkorliklarini yo'lga qo'ygan",
+      "TEZOL, asoschi (2023 — hozir): yetkazib berish va logistika startapini ishlab chiqqan; mahsulot rivoji va operatsiyalarni boshqargan; bozorga chiqish strategiyasi va pitch deck tayyorlagan"
     ]
   }
   // Keyin qo'shish uchun namuna:
