@@ -9,6 +9,9 @@
   var HOME = Math.max(0, SCREENS.findIndex(function (s) { return s.id === CFG.homeId; }));
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+
   function $(id) { return document.getElementById(id); }
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -27,7 +30,7 @@
     ready: ["rotating"],
     rotating: ["dropping"],
     dropping: ["carousel"],
-    carousel: ["detail"],
+    carousel: ["detail", "ready"],
     detail: ["carousel"]
   };
   var state = { stage: "loading", selectedId: null, locked: false };
@@ -35,6 +38,8 @@
     if (ALLOWED[state.stage].indexOf(next) === -1) return false;
     state.stage = next;
     document.body.dataset.stage = next;
+    show($("moreBtn"), next === "ready" || next === "carousel");
+    show($("exitBtn"), next === "carousel");
     return true;
   }
   function show(node, on) { node.classList.toggle("is-visible", on); }
@@ -107,7 +112,7 @@
     return new Promise(function (resolve) {
       v.onended = resolve;
       v.onerror = resolve;
-      v.src = src;
+      if (v.getAttribute("src") !== src) v.src = src; else v.currentTime = 0;
       var p = v.play();
       if (p && p.then) {
         p.then(function () { v.classList.add("is-in"); }).catch(resolve);
@@ -303,19 +308,23 @@
   var detail = $("detail"), panel = $("detailPanel"), backdrop = $("detailBackdrop"), backBtn = $("backBtn");
   var openedFrom = null;
 
-  function fillDetail(s) {
-    panel.textContent = "";
-    var body = el("div", "detail__body");
-    body.appendChild(el("p", "detail__cat", s.category || ""));
-    var h = el("h2", "detail__title", s.title);
-    h.id = "detailTitle";
-    body.appendChild(h);
-    body.appendChild(el("p", "detail__desc", s.description));
-    (s.content || "").split("\n\n").forEach(function (p) { if (p.trim()) body.appendChild(el("p", "", p)); });
+  // Bitta ekran ma'lumotini chizadi: batafsil oynada ham, pastdagi sahifada ham shu ishlatiladi
+  function renderContent(box, s, titleTag, titleId) {
+    box.appendChild(el("p", "detail__cat", s.category || ""));
+    var h = el(titleTag, "detail__title", s.title);
+    if (titleId) h.id = titleId;
+    box.appendChild(h);
+    box.appendChild(el("p", "detail__desc", s.description));
+    (s.content || "").split("\n\n").forEach(function (p) { if (p.trim()) box.appendChild(el("p", "", p)); });
     if (s.highlights && s.highlights.length) {
       var ul = el("ul", "detail__list");
       s.highlights.forEach(function (t) { ul.appendChild(el("li", "", t)); });
-      body.appendChild(ul);
+      box.appendChild(ul);
+    }
+    if (s.chips && s.chips.length) {
+      var cl = el("ul", "chips");
+      s.chips.forEach(function (t) { cl.appendChild(el("li", "", t)); });
+      box.appendChild(cl);
     }
     if (s.media && s.media.length) {
       var g = el("div", "detail__media");
@@ -326,17 +335,23 @@
           var im = el("img"); im.src = m.url; im.alt = m.alt || ""; im.loading = "lazy"; g.appendChild(im);
         }
       });
-      body.appendChild(g);
+      box.appendChild(g);
     }
-    if (s.links && s.links.length) {
-      var row = el("div", "detail__links");
-      s.links.forEach(function (l) {
-        var a = el("a", "btn", l.label);
-        a.href = l.url; a.target = "_blank"; a.rel = "noopener";
-        row.appendChild(a);
-      });
-      body.appendChild(row);
-    }
+    if (s.links && s.links.length) box.appendChild(linkRow(s.links, "detail__links"));
+  }
+  function linkRow(links, cls) {
+    var row = el("div", cls);
+    links.forEach(function (l) {
+      var a = el("a", "btn", l.label);
+      a.href = l.url; a.target = "_blank"; a.rel = "noopener";
+      row.appendChild(a);
+    });
+    return row;
+  }
+  function fillDetail(s) {
+    panel.textContent = "";
+    var body = el("div", "detail__body");
+    renderContent(body, s, "h2", "detailTitle");
     panel.appendChild(body);
     return body;
   }
@@ -387,7 +402,66 @@
   backBtn.addEventListener("click", closeDetail);
   backdrop.addEventListener("click", closeDetail);
 
+  /* ================= CHIQISH: sahnaga qaytish ================= */
+  $("exitBtn").addEventListener("click", async function () {
+    if (state.locked || state.stage !== "carousel") return;
+    state.locked = true;
+    hint.classList.remove("is-visible");
+    holo.classList.remove("is-visible", "is-settled");
+    pos = target = HOME;
+    layout();
+    if (CFG.useVideo && !degraded) vRotate.classList.remove("is-in"); else bgDim.classList.remove("is-in");
+    go("ready");
+    await wait(1300);
+    show(ctaBtn, true);
+    state.locked = false;
+  });
+
+  // Gorizontal trackpad surishi ham karuselni suradi
+  var wheelAt = 0;
+  holo.addEventListener("wheel", function (e) {
+    if (state.stage !== "carousel" || state.locked) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 1.2 && Math.abs(e.deltaX) > 6) {
+      e.preventDefault();
+      var now = performance.now();
+      if (now - wheelAt > 380) { wheelAt = now; setTarget(target + (e.deltaX > 0 ? 1 : -1)); }
+    }
+  }, { passive: false });
+
+  /* ================= PASTGA SURILGANDA: BARCHA MA'LUMOTLAR ================= */
+  function renderInfo() {
+    var root = $("info");
+    var inner = el("div", "info__inner");
+    var hero = SCREENS.filter(function (s) { return s.kind === "hero"; })[0];
+    var head = el("header", "info__head");
+    head.appendChild(el("p", "info__eyebrow", "BARCHA MA'LUMOTLAR"));
+    head.appendChild(el("h2", "info__name", "Hasan Azimboyev"));
+    if (hero) {
+      head.appendChild(el("p", "info__role", hero.description));
+      if (hero.content) head.appendChild(el("p", "info__lead", hero.content));
+      if (hero.links) head.appendChild(linkRow(hero.links, "info__links"));
+    }
+    inner.appendChild(head);
+    var grid = el("div", "info__grid");
+    SCREENS.forEach(function (s) {
+      if (s.kind === "hero") return;
+      var wide = (s.highlights || []).length >= 3 || (s.chips || []).length >= 8;
+      var card = el("article", "info__card" + (wide ? " info__card--wide" : ""));
+      card.id = "sec-" + s.id;
+      card.appendChild(icon(s.icon));
+      renderContent(card, s, "h3");
+      grid.appendChild(card);
+    });
+    inner.appendChild(grid);
+    root.appendChild(inner);
+  }
+  function scrollToEl(node) { node.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }
+  $("moreBtn").addEventListener("click", function () { scrollToEl($("info")); });
+  $("topBtn").addEventListener("click", function () { scrollToEl($("experience")); });
+  $("year").textContent = new Date().getFullYear();
+
   /* ================= BOSHLASH ================= */
+  renderInfo();
   buildTrack();
   measure();
   layout();

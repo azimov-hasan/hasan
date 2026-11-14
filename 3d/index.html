@@ -14,19 +14,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <noscript><style>#loader{display:none}.nojs{display:block}</style></noscript>
+  <noscript><style>#loader{display:none}.nojs{display:block}.experience{display:none}</style></noscript>
 </head>
 <body data-stage="loading">
   <h1 class="sr-only">Hasan Azimboyev — marketing menejeri, dasturchi va tadbirkor</h1>
-
-  <!-- FON: videolar yoki vaqtincha rasmlar -->
-  <div class="stage" aria-hidden="true">
-    <img class="bg bg--still" id="bgStill" src="assets/img/studio-still.jpg" alt="">
-    <img class="bg bg--dim" id="bgDim" src="assets/img/studio-dim.jpg" alt="">
-    <video class="bg bg--video" id="vIntro" muted playsinline preload="none"></video>
-    <video class="bg bg--video" id="vRotate" muted playsinline preload="none"></video>
-    <div class="stage__shade"></div>
-  </div>
 
   <!-- YUKLANISH -->
   <div class="loader" id="loader">
@@ -37,16 +28,39 @@
     <button class="enter" id="enterBtn" disabled>KIRISH</button>
   </div>
 
-  <button class="skip fade" id="skipBtn">Introni o'tkazib yuborish →</button>
-  <button class="cta fade" id="ctaBtn"></button>
+  <!-- 1-QISM: SAHNA (bitta ekran balandligida) -->
+  <section class="experience" id="experience">
+    <div class="stage" aria-hidden="true">
+      <img class="bg bg--still" id="bgStill" src="assets/img/studio-still.jpg" alt="">
+      <img class="bg bg--dim" id="bgDim" src="assets/img/studio-dim.jpg" alt="">
+      <video class="bg bg--video" id="vIntro" muted playsinline preload="none"></video>
+      <video class="bg bg--video" id="vRotate" muted playsinline preload="none"></video>
+      <div class="stage__shade"></div>
+    </div>
 
-  <!-- HOLOGRAMMA KARUSELI -->
-  <section class="holo fade" id="holo" aria-label="Portfolio ekranlari">
-    <div class="holo__track" id="track"></div>
-    <button class="holo__nav holo__nav--prev" id="prevBtn" aria-label="Oldingi ekran">‹</button>
-    <button class="holo__nav holo__nav--next" id="nextBtn" aria-label="Keyingi ekran">›</button>
-    <p class="holo__hint" id="hint">Suring yoki o'qlarni bosing. Ochish uchun markaziy ekranni bosing.</p>
+    <button class="skip fade" id="skipBtn">Introni o'tkazib yuborish →</button>
+    <button class="exit fade" id="exitBtn">← CHIQISH</button>
+    <button class="cta fade" id="ctaBtn"></button>
+
+    <!-- HOLOGRAMMA KARUSELI -->
+    <div class="holo fade" id="holo" aria-label="Portfolio ekranlari">
+      <div class="holo__track" id="track"></div>
+      <button class="holo__nav holo__nav--prev" id="prevBtn" aria-label="Oldingi ekran">‹</button>
+      <button class="holo__nav holo__nav--next" id="nextBtn" aria-label="Keyingi ekran">›</button>
+      <p class="holo__hint" id="hint">Suring yoki o'qlarni bosing. Ochish uchun markaziy ekranni bosing.</p>
+    </div>
+
+    <button class="more fade" id="moreBtn">Barcha ma'lumotlar <span aria-hidden="true">↓</span></button>
+    <p class="badge" id="badge" hidden>Vaqtincha fon: Blender videolari kutilmoqda</p>
   </section>
+
+  <!-- 2-QISM: PASTGA SURILGANDA BARCHA MA'LUMOTLAR (screens.js dan chiziladi) -->
+  <main class="info" id="info" aria-label="Barcha ma'lumotlar"></main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Hasan Azimboyev</span>
+    <button class="footer__top" id="topBtn">↑ Studiyaga qaytish</button>
+  </footer>
 
   <!-- BATAFSIL KO'RINISH -->
   <section class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="detailTitle">
@@ -55,12 +69,10 @@
     <article class="detail__panel" id="detailPanel" tabindex="-1"></article>
   </section>
 
-  <p class="badge" id="badge" hidden>Vaqtincha fon: Blender videolari kutilmoqda</p>
-
   <noscript>
     <div class="nojs">
       <h2>Hasan Azimboyev</h2>
-      <p>Marketing menejeri, dasturchi va tadbirkor. Insayr (turizm texnologiyasi) va TEZOL (logistika) asoschisi.</p>
+      <p>Marketing menejeri, dasturchi va tadbirkor. Insayr (turizm texnologiyasi) va TEZOL (logistika) asoschisi. TATU, Kompyuter injiniringi (2021–2025).</p>
       <p>Telegram: <a href="https://t.me/Azimboyev_h">@Azimboyev_h</a> · Instagram: <a href="https://instagram.com/hasan.az1mov">hasan.az1mov</a></p>
       <p>Interaktiv portfolioni ko'rish uchun JavaScript'ni yoqing.</p>
     </div>
