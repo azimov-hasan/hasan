@@ -113,3 +113,87 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.1; margin: 0; }
   }
   .nav__links.is-open { display: flex; }
 }
+
+/* ===== 11. 2-BOSQICH: HERO VIZUALI ===== */
+.hero { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 40px; }
+.hero__visual { position: relative; display: grid; place-items: center; min-height: 320px; perspective: 900px; }
+.glow {
+  position: absolute; width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, var(--accent-2) 45%, transparent 70%);
+  filter: blur(70px); opacity: .45; animation: pulse 6s ease-in-out infinite;
+}
+.cube { position: relative; width: 160px; height: 160px; transform-style: preserve-3d; animation: spin 18s linear infinite; }
+.cube i {
+  position: absolute; inset: 0; border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); backdrop-filter: blur(2px);
+}
+.cube .f1 { transform: translateZ(80px); }
+.cube .f2 { transform: rotateY(180deg) translateZ(80px); }
+.cube .f3 { transform: rotateY(90deg) translateZ(80px); }
+.cube .f4 { transform: rotateY(-90deg) translateZ(80px); }
+.cube .f5 { transform: rotateX(90deg) translateZ(80px); }
+.cube .f6 { transform: rotateX(-90deg) translateZ(80px); }
+@keyframes spin { to { transform: rotateX(360deg) rotateY(360deg); } }
+@keyframes pulse { 50% { opacity: .7; transform: scale(1.1); } }
+
+/* ===== 12. TIL TUGMASI ===== */
+.lang {
+  background: transparent; color: var(--muted); border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 14px; font: 600 .8rem var(--font-body); cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+.lang:hover { color: var(--text); border-color: var(--accent); }
+
+/* ===== 13. DIZAYN GALEREYASI ===== */
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.tile {
+  position: relative; margin: 0; min-height: 220px; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+  transition: transform .25s, border-color .25s;
+}
+.tile:hover { transform: translateY(-4px); border-color: var(--accent); }
+.tile--wide { grid-column: span 2; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tile__tool { position: relative; font-family: var(--font-head); font-size: 1.3rem; font-weight: 600; }
+.tile figcaption { position: relative; color: var(--muted); font-size: .85rem; }
+.t1 { background: linear-gradient(135deg, #1b2a52, #3a2a6b); }
+.t2 { background: linear-gradient(135deg, #3a1d4d, #5a2a4a); }
+.t3 { background: linear-gradient(135deg, #1d3a4d, #1f5a6b); }
+.t4 { background: linear-gradient(135deg, #3a3a1d, #5a4a2a); }
+.t5 { background: linear-gradient(135deg, #1d2a4d, #2a4a6b); }
+
+/* ===== 14. MEN HAQIMDA ===== */
+.about { display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: start; }
+.about__photo {
+  position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--line); display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--bg-2), #1b2140);
+}
+.about__photo span { font-family: var(--font-head); font-size: 4rem; font-weight: 700; color: var(--accent); }
+.about__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.about__body p { margin: 0 0 16px; max-width: 62ch; }
+.about__body h3 { font-size: 1.1rem; margin: 28px 0 12px; }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; }
+.chips li { border: 1px solid var(--line); background: var(--bg-2); border-radius: 999px; padding: 6px 14px; font-size: .9rem; }
+.timeline { list-style: none; padding: 0 0 0 18px; margin: 0 0 24px; border-left: 1px solid var(--line); }
+.timeline li { position: relative; display: flex; gap: 18px; padding: 8px 0; }
+.timeline li::before {
+  content: ""; position: absolute; left: -23px; top: 18px; width: 9px; height: 9px;
+  border-radius: 50%; background: var(--accent);
+}
+.timeline b { font-family: var(--font-head); color: var(--accent); min-width: 44px; }
+
+/* ===== 15. 2-BOSQICH: MOBIL ===== */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero__visual { min-height: 240px; order: -1; }
+  .about { grid-template-columns: 1fr; }
+  .about__photo { max-width: 280px; }
+}
+@media (max-width: 760px) {
+  .gallery { grid-template-columns: 1fr; }
+  .tile--wide { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cube, .glow { animation: none; }
+}
