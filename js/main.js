@@ -50,7 +50,6 @@
   var degraded = false;
 
   ctaBtn.textContent = CFG.ctaText;
-  if (!CFG.useVideo) $("badge").hidden = false;
 
   /* ================= YUKLANISH (haqiqiy resurslar bo'yicha) ================= */
   var assets = [{ t: "img", src: CFG.stills.main }, { t: "img", src: CFG.stills.dim }];

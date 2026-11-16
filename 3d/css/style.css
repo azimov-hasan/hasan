@@ -36,6 +36,10 @@ a { color: inherit; }
 .stage { position: absolute; inset: 0; background: #000; overflow: hidden; }
 .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; opacity: 0; transition: opacity 1.8s ease, transform 2.6s cubic-bezier(.45, 0, .2, 1); }
 .bg.is-in { opacity: 1; }
+/* Portret ekranda (telefon) butun sahna ko'rinsin: divanlar va Hasan kesilib ketmasin */
+@media (max-aspect-ratio: 4/5) {
+  .bg--still, .bg--video { object-fit: contain; }
+}
 .bg--video { transition: none; }
 body[data-stage="rotating"] .bg--still, body[data-stage="rotating"] .bg--dim,
 body[data-stage="dropping"] .bg--still, body[data-stage="dropping"] .bg--dim,
