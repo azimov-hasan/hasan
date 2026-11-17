@@ -169,6 +169,10 @@ body.degraded .stage { background: radial-gradient(ellipse at 50% 0%, #2a2114 0%
 .detail__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .62); backdrop-filter: blur(4px); }
 .detail__panel {
   position: relative; width: min(860px, 100%); max-height: 100%; overflow-y: auto; border-radius: 20px; padding: clamp(22px, 4vw, 44px);
+  padding-bottom: calc(clamp(22px, 4vw, 44px) + 28px); /* pastki fade uchun joy: skill chiplar fade ostida qolmasin */
+  overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent 100%);
   background: linear-gradient(160deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02) 40%), rgba(8, 14, 20, .82);
   backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(102, 224, 255, .55); box-shadow: 0 0 60px rgba(102, 224, 255, .22);
@@ -193,6 +197,11 @@ body.degraded .stage { background: radial-gradient(ellipse at 50% 0%, #2a2114 0%
   letter-spacing: .12em; font-size: .78rem; font-weight: 600; backdrop-filter: blur(8px);
 }
 .back:hover { background: rgba(102, 224, 255, .15); }
+@media (max-width: 480px), (max-height: 720px) {
+  .detail { padding: 64px 10px 12px; }
+  .detail__panel { padding: 18px 18px 40px; }
+  .detail__desc { margin-bottom: 12px; }
+}
 
 /* ===== BOSHQA ===== */
 .badge { position: absolute; z-index: 20; left: max(16px, env(safe-area-inset-left)); bottom: max(14px, env(safe-area-inset-bottom)); margin: 0; font-size: .72rem; color: rgba(255, 255, 255, .45); max-width: 55vw; }
